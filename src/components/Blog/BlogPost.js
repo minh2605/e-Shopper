@@ -2,6 +2,10 @@ import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 class BlogPost extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.api = "http://192.168.30.105:8080/laravel/public/upload";
+  }
   render() {
     let blogBtn = (
       <Link to={`/blog/detail/${this.props.blog.id}`} className="blog__btn">
@@ -53,7 +57,7 @@ class BlogPost extends PureComponent {
           </div>
         </div>
         <Link className="blog__img" to={`/blog/detail/${this.props.blog.id}`}>
-          <img src={this.props.blog.image} alt="" />
+          <img src={`${this.api}/Blog/image/${this.props.blog.image}`} alt="" />
         </Link>
         <p className="blog__desc">{this.props.blog.description}</p>
         {blogBtn}

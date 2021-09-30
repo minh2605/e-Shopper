@@ -60,7 +60,7 @@ class Footer extends PureComponent {
                 </div>
                 <div className="third col-sm-3">
                   <div className="img">
-                    <img src="./images/map.png" alt="Map" />
+                    <img src="/images/map.png" alt="Map" />
                     <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                   </div>
                 </div>
