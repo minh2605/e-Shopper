@@ -16,17 +16,17 @@ CommentList.defaultProps = {
 
 function CommentList(props) {
   const { comments, setIsReply, setCommentFocusId } = props;
-  const api = "http://192.168.30.105:8080/laravel/public";
+  const api = "http://192.168.30.105:8080/laravel/public"; //to get link image
 
   function handleReplyComment(e) {
     if (setIsReply) {
-      const commentId = e.target.closest(".comment").dataset.id;
-      setCommentFocusId(parseInt(commentId));
-      setIsReply(true); //change state isReply in blockDetail to make handleReply call again
+      //Check if user click on reply button
+      const commentId = e.target.closest(".comment").dataset.id; //get commentId parent
+      setCommentFocusId(parseInt(commentId)); //set state of parent comment Id in blogDetail
+      setIsReply(true);
     }
   }
 
-  console.log("listComment", comments);
   return (
     <section className="comment__section">
       <div className="comment__container">

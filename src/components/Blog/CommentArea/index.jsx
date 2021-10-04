@@ -18,17 +18,20 @@ function CommentArea(props) {
   const [commentValue, setCommentValue] = useState("");
   const inputRef = useRef(null);
 
-  //Keep Focus again if blogId is change
+  //Keep Focus on textarea again if blogId change
   useEffect(() => {
     if (commentFocusId !== 0) {
       inputRef.current && inputRef.current.focus();
     }
   }, [commentFocusId]);
 
+  //GetValue when value of textarea change
   function handleInputChange(e) {
     setCommentValue(e.target.value);
   }
 
+  //Check login before comment
+  //Send comment info to BlogDetail to post to server
   function handleCommentPost(e) {
     e.preventDefault();
     const commentContent = commentValue;

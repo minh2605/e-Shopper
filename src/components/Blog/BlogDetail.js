@@ -106,7 +106,7 @@ class BlogDetail extends PureComponent {
         />
         <CommentArea
           onSubmit={this.handleCommentPost}
-          commentFocusId={this.state.commentFocusId} //this prop to know is focusing on which blog id
+          commentFocusId={this.state.commentFocusId} //this prop to know is focusing on which comment id
         />
       </div>
     );
