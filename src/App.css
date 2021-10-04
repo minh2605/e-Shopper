@@ -10,6 +10,10 @@ a {
 a:hover {
   text-decoration: none;
 }
+
+button:focus {
+  outline: none;
+}
 /* ---- Header ----- */
 /* TOP */
 .header__top {

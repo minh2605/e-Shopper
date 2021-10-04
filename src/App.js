@@ -8,7 +8,6 @@ import BlogDetail from "./components/Blog/BlogDetail";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login/";
 import Home from "./components/Home";
-import { useState } from "react";
 
 function App() {
   // const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")));
