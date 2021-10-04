@@ -83,10 +83,6 @@ class BlogDetail extends PureComponent {
     this.setState({ commentFocusId: id });
   };
 
-  getNewListComment = (newComment) => {
-    console.log(newComment);
-  };
-
   render() {
     console.log("render again");
     console.log(this.state.listComment);
