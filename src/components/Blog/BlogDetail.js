@@ -17,11 +17,14 @@ class BlogDetail extends PureComponent {
       listComment: [],
       isReply: false,
       commentFocusId: 0,
+      rate: 0,
     };
   }
 
   componentDidMount = () => {
     const id = this.props.match.params.id;
+
+    //Get Comment api
     axios
       .get(`${this.api}/api/blog/detail/${id}`)
       .then((res) => {
@@ -30,6 +33,17 @@ class BlogDetail extends PureComponent {
           blogDetail: res.data.data,
           listComment: res.data.data.comment,
         });
+      })
+      .catch((error) => console.log(error));
+
+    //Get Rating api
+    axios
+      .get(`${this.api}/api/blog/rate/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data.length === 0) return;
+        const averageRate = this.getAverageRate(res.data.data);
+        this.setState({ rate: averageRate });
       })
       .catch((error) => console.log(error));
   };
@@ -83,9 +97,15 @@ class BlogDetail extends PureComponent {
     this.setState({ commentFocusId: id });
   };
 
+  getAverageRate = (listRate) => {
+    const totalRate = Object.values(listRate).reduce((prev, curr) => {
+      return prev + curr.rate;
+    }, 0);
+    const averageRate = totalRate / Object.values(listRate).length;
+    return averageRate;
+  };
+
   render() {
-    console.log("render again");
-    console.log(this.state.listComment);
     return (
       <div className="col-sm-9">
         <section className="blog__section">
@@ -98,7 +118,7 @@ class BlogDetail extends PureComponent {
             </div>
           </div>
         </section>
-        <Rating />
+        <Rating blogId={this.state.blogDetail.id} rate={this.state.rate} />
         <CommentList
           comments={this.state.listComment}
           setIsReply={this.setIsReply}

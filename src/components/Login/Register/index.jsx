@@ -40,6 +40,7 @@ function Register() {
       } else console.log("Fail");
     }
     postRegister();
+    //eslint-disable-next-line
   }, [validForm]);
 
   function handleInput(e) {
