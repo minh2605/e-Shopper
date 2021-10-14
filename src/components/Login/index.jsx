@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Register from "./Register";
 import "./Login.scss";
 import FormErrors from "../FormErrors";
-import axios from "axios";
+import API from "../Api";
 
 function isEmail(email) {
   const re =
@@ -15,34 +15,31 @@ function Login(props) {
     level: 0,
   });
   const [formErrors, setFormErrors] = useState({});
-  const [validForm, setValidForm] = useState(false);
-  useEffect(() => {
+  // const [validForm, setValidForm] = useState(false);
+  // useEffect(() => {
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [validForm]);
+
+  function postLogin() {
     const userLogin = loginInfo;
-    function postLogin() {
-      if (validForm) {
-        const api = "http://192.168.30.105:8080/laravel/public/api";
-        axios
-          .post(`${api}/login`, userLogin)
-          .then((res) => {
-            const { Auth, response, success } = res.data;
-            if (response === "success") {
-              localStorage.setItem("auth", JSON.stringify(Auth));
-              localStorage.setItem("token", success.token);
-              console.log(Auth);
-              console.log(success);
-              alert("Login successfully");
-              props.history.push("/");
-            } else {
-              console.log(res.data.response);
-              console.log("Email or password is not correct");
-            }
-          })
-          .catch((error) => console.log(error));
-      } else return;
-    }
-    postLogin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validForm]);
+    API.post(`/api/login`, userLogin)
+      .then((res) => {
+        const { Auth, response, success } = res.data;
+        if (response === "success") {
+          localStorage.setItem("auth", JSON.stringify(Auth));
+          localStorage.setItem("token", success.token);
+          console.log(Auth);
+          console.log(success);
+          alert("Login successfully");
+          props.history.push("/");
+        } else {
+          console.log(res.data.response);
+          alert("Email or password is not correct");
+        }
+      })
+      .catch((error) => console.log(error));
+  }
 
   function handleInput(e) {
     const newLoginInfo = { ...loginInfo, [e.target.name]: e.target.value };
@@ -73,7 +70,8 @@ function Login(props) {
     }
 
     if (flag) {
-      setValidForm(true);
+      postLogin();
+      // setValidForm(true);
     }
   }
 

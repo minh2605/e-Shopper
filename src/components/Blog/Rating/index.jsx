@@ -1,14 +1,13 @@
 import React, { PureComponent } from "react";
 import StarRatings from "react-star-ratings";
 import PropTypes from "prop-types";
-import axios from "axios";
 
+import API from "../../Api/";
 import "./Rating.scss";
 
 class Rating extends PureComponent {
   constructor(props) {
     super(props);
-    this.api = "http://192.168.30.105:8080/laravel/public";
     this.state = {
       rate: 0,
     };
@@ -20,7 +19,7 @@ class Rating extends PureComponent {
     const userId = JSON.parse(localStorage.getItem("auth")).id;
     const token = localStorage.getItem("token");
 
-    const url = `${this.api}/api/blog/rate/${blogId}`;
+    const url = `/api/blog/rate/${blogId}`;
     const config = {
       headers: {
         Authorization: "Bearer " + token,
@@ -33,8 +32,7 @@ class Rating extends PureComponent {
     formData.append("blog_id", blogId);
     formData.append("rate", newRating);
 
-    axios
-      .post(url, formData, config)
+    API.post(url, formData, config)
       .then((res) => {
         if (res.data.status === 200) {
           console.log(res);

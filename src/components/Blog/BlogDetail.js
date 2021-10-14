@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import axios from "axios";
 
+import API from "../Api/";
 import BlogPost from "./BlogPost";
 import Rating from "./Rating";
 import CommentList from "./CommentList";
@@ -9,7 +9,6 @@ import CommentArea from "./CommentArea";
 class BlogDetail extends PureComponent {
   constructor(props) {
     super(props);
-    this.api = "http://192.168.30.105:8080/laravel/public";
     this.userAuth = JSON.parse(localStorage.getItem("auth"));
     this.token = localStorage.getItem("token");
     this.state = {
@@ -25,8 +24,7 @@ class BlogDetail extends PureComponent {
     const id = this.props.match.params.id;
 
     //Get Comment api
-    axios
-      .get(`${this.api}/api/blog/detail/${id}`)
+    API.get(`/api/blog/detail/${id}`)
       .then((res) => {
         // console.log(res);
         this.setState({
@@ -37,8 +35,7 @@ class BlogDetail extends PureComponent {
       .catch((error) => console.log(error));
 
     //Get Rating api
-    axios
-      .get(`${this.api}/api/blog/rate/${id}`)
+    API.get(`/api/blog/rate/${id}`)
       .then((res) => {
         console.log(res.data.data);
         if (res.data.data.length === 0) return;
@@ -54,7 +51,7 @@ class BlogDetail extends PureComponent {
     const { id: id_user, name, avatar } = this.userAuth;
     const idFocusBlog = this.state.commentFocusId;
 
-    const url = `${this.api}/api/blog/comment/${id_blog}`;
+    const url = `/api/blog/comment/${id_blog}`;
     const config = {
       headers: {
         Authorization: "Bearer " + this.token,
@@ -70,8 +67,7 @@ class BlogDetail extends PureComponent {
     formData.append("image_user", avatar);
     formData.append("name_user", name);
 
-    axios
-      .post(url, formData, config)
+    API.post(url, formData, config)
       .then((res) => {
         console.log(res.data.data);
         console.log(this.state.listComment);

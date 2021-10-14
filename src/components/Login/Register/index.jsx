@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Register.scss";
 import FormErrors from "../../FormErrors";
-import axios from "axios";
+import API from "../../Api";
 
 function isEmail(email) {
   const re =
@@ -20,12 +20,11 @@ function Register() {
   useEffect(() => {
     function postRegister() {
       if (validForm) {
-        const api = "http://192.168.30.105:8080/laravel/public/api";
+        // const api = "http://192.168.30.105:8080/laravel/public/api";
         const userRegister = register;
         console.log("posting");
         console.log(userRegister);
-        axios
-          .post(`${api}/register`, userRegister)
+        API.post(`/register`, userRegister)
           .then((res) => {
             console.log(res);
             if (res.data.message === "success") {
@@ -37,7 +36,7 @@ function Register() {
             }
           })
           .catch((error) => console.log(error));
-      } else console.log("Fail");
+      } else return;
     }
     postRegister();
     //eslint-disable-next-line
@@ -73,7 +72,7 @@ function Register() {
       const { name, size } = avatar.file;
       const extension = name.split(".")[1];
 
-      if (fileExtensions.indexOf[extension] === -1) {
+      if (fileExtensions.indexOf(extension) === -1) {
         return "File must be an image";
       }
       if (size > 1024 ** 2) {

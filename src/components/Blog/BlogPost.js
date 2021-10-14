@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class BlogPost extends PureComponent {
   constructor(props) {
     super(props);
-    this.api = "http://192.168.30.105:8080/laravel/public/upload";
+    this.api = "http://192.168.30.105:8080/laravel/public/upload"; //link to get image
   }
   render() {
     let blogBtn = (

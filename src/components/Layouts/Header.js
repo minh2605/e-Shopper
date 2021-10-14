@@ -1,16 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-
-Header.propTyeps = {
-  auth: PropTypes.object,
-  token: PropTypes.string,
-};
-
-Header.defaultProps = {
-  auth: null,
-  token: null,
-};
 
 function Header(props) {
   const auth = JSON.parse(localStorage.getItem("auth"));
@@ -34,7 +23,7 @@ function Header(props) {
       const { name } = auth;
       jsx = (
         <li className="nav__link">
-          <Link to="/account">
+          <Link to="/account/member">
             <i className="fas fa-user"></i>
             <span>{name}</span>
           </Link>
