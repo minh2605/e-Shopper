@@ -8,8 +8,11 @@ import Blog from "./components/Blog/Blog";
 import BlogDetail from "./components/Blog/BlogDetail";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login/";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Account from "./components/Account";
+import Product from "./components/Product";
+import ProductDetail from "./components/Product/ProductDetail";
+import Cart from "./components/Product/Cart";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
@@ -19,6 +22,9 @@ ReactDOM.render(
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/blog/list" exact component={Blog} />
+          <Route path="/product/list" component={Product} />
+          <Route path="/product/detail/:id" component={ProductDetail} />
+          <Route path="/product/cart" component={Cart} />
           <Route path="/blog/detail/:id" component={BlogDetail} />
           <Route path="/login" component={Login} />
           <Route component={Account} />

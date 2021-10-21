@@ -136,7 +136,9 @@ function Header(props) {
                   </li>
                   <li className="nav__link">
                     <i className="fas fa-shopping-cart"></i>
-                    <a href="#a">Cart</a>
+                    <Link to="/product/cart">
+                      <span>Cart</span>
+                    </Link>
                   </li>
                   {handleLoginMenuLogined()}
                 </nav>
@@ -159,7 +161,9 @@ function Header(props) {
                   </a>
                   <ul>
                     <li>
-                      <a href="#a">Products</a>
+                      <Link to="/product/list">
+                        <span>Products</span>
+                      </Link>
                     </li>
                     <li>
                       <a href="#a">Product Detail</a>
@@ -168,7 +172,9 @@ function Header(props) {
                       <a href="#a">Checkout</a>
                     </li>
                     <li>
-                      <a href="#a">Cart</a>
+                      <Link to="/product/cart">
+                        <span>Cart</span>
+                      </Link>
                     </li>
                     <li>
                       <a href="#a">Login</a>

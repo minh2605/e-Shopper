@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import BlogPost from "./BlogPost";
+import API_LINK from "../Api/ApiLink";
 // import axios from "axios";
 
 class Blog extends PureComponent {
   constructor(props) {
     super(props);
-    this.api = "http://192.168.30.105:8080/laravel/public";
+    this.api = API_LINK;
     this.state = {
       blogList: [],
     };

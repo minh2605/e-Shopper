@@ -192,21 +192,21 @@ nav {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 .category__item-title + ul {
-  display: none;
-  height: 0;
-  padding: 15px 0;
+  height: 0px;
   font-size: 12px;
-}
-
-.category__item-title + ul > li {
-  margin-top: 5px;
+  overflow: hidden;
+  transition: all 0.4s ease-out;
 }
 
 .category__item-title.active + ul {
-  display: block;
-  height: auto;
+  height: 100px;
+  max-height: 200px;
+}
+.category__item-title + ul > li {
+  margin-top: 5px;
 }
 
 /* BLOG */

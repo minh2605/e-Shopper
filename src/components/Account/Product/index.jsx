@@ -2,13 +2,14 @@ import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import API from "../../Api";
+import API_LINK from "../../Api/ApiLink";
 import "./Product.scss";
 
 class Product extends PureComponent {
   constructor(props) {
     super(props);
     this.token = localStorage.getItem("token");
-    this.api = "http://192.168.30.105:8080/laravel/public/upload/user/product";
+    this.api = `${API_LINK}/upload/user/product`;
     this.state = {
       myProducts: {},
     };

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./CommentList.scss";
+import API_LINK from "../../Api/ApiLink";
 
 CommentList.propTypes = {
   comments: PropTypes.array,
@@ -16,7 +17,7 @@ CommentList.defaultProps = {
 
 function CommentList(props) {
   const { comments, setIsReply, setCommentFocusId } = props;
-  const api = "http://192.168.30.105:8080/laravel/public"; //to get link image
+  const api = API_LINK; //to get link image
 
   function handleReplyComment(e) {
     if (setIsReply) {

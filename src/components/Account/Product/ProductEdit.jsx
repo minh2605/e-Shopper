@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 
 import API from "../../Api";
+import API_LINK from "../../Api/ApiLink";
 import FormErrors from "../../FormErrors";
 
 const getBrandAndCategory = async () => {
@@ -34,7 +35,7 @@ class ProductEdit extends PureComponent {
   constructor(props) {
     super(props);
     this.token = localStorage.getItem("token");
-    this.api = "http://192.168.30.105:8080/laravel/public/upload/user/product";
+    this.api = `${API_LINK}/upload/user/product`;
     this.state = {
       brands: [],
       categories: [],

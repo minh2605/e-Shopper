@@ -15,7 +15,6 @@ class Account extends PureComponent {
           <Route path="/account/product/list" component={Product} />
           <Route path="/account/product/add" component={ProductAdd} />
           <Route path="/account/product/edit/:id" component={ProductEdit} />
-          {/* <Route path='/account/product/edit/:id?' component={Edit} /> */}
         </Switch>
       </App>
     );

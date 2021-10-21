@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
+import API_LINK from "../Api/ApiLink";
 
 class BlogPost extends PureComponent {
   constructor(props) {
     super(props);
-    this.api = "http://192.168.30.105:8080/laravel/public/upload"; //link to get image
+    this.api = `${API_LINK}/upload`; //link to get image
   }
   render() {
     let blogBtn = (
