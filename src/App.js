@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./components/Layouts/Header";
 import Footer from "./components/Layouts/Footer";
 import SideBar from "./components/SideBar";
+import MyProvider from "./components/Context";
 
 class App extends PureComponent {
   // const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")));
@@ -13,18 +14,20 @@ class App extends PureComponent {
   render() {
     const { pathname: pathName } = this.props.location;
     return (
-      <div className="App">
-        <Header />
-        <main>
-          <div className="container">
-            <div className="row">
-              {pathName.includes("account") ? null : <SideBar />}
-              {this.props.children}
+      <MyProvider>
+        <div className="App">
+          <Header />
+          <main>
+            <div className="container">
+              <div className="row">
+                {pathName.includes("account") ? null : <SideBar />}
+                {this.props.children}
+              </div>
             </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
+          </main>
+          <Footer />
+        </div>
+      </MyProvider>
     );
   }
 }

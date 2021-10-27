@@ -13,24 +13,31 @@ import Account from "./components/Account";
 import Product from "./components/Product";
 import ProductDetail from "./components/Product/ProductDetail";
 import Cart from "./components/Product/Cart";
+// import Cart2 from "./components/Product/Cart2";
+import WishList from "./components/WishList";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/blog/list" exact component={Blog} />
-          <Route path="/product/list" component={Product} />
-          <Route path="/product/detail/:id" component={ProductDetail} />
-          <Route path="/product/cart" component={Cart} />
-          <Route path="/blog/detail/:id" component={BlogDetail} />
-          <Route path="/login" component={Login} />
-          <Route component={Account} />
-          <Route default component={NotFound} />
-        </Switch>
-      </App>
+      <Provider store={store}>
+        <App>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/blog/list" exact component={Blog} />
+            <Route path="/product/list" component={Product} />
+            <Route path="/product/detail/:id" component={ProductDetail} />
+            <Route path="/product/cart" component={Cart} />
+            <Route path="/wishlist" component={WishList} />
+            <Route path="/blog/detail/:id" component={BlogDetail} />
+            <Route path="/login" component={Login} />
+            <Route component={Account} />
+            <Route default component={NotFound} />
+          </Switch>
+        </App>
+      </Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

@@ -19,6 +19,7 @@ function CartProduct(props) {
     setQty(parseInt(e.target.value));
     localProduct[id] = parseInt(e.target.value);
     localStorage.setItem("cart", JSON.stringify(localProduct));
+    localStorage.setItem("cartCount", Object.keys(localProduct).length);
   };
 
   const handleIncreaseQty = (id) => {
@@ -28,6 +29,7 @@ function CartProduct(props) {
     localProduct[id] = newQty;
     handelIncrement(id, newQty);
     localStorage.setItem("cart", JSON.stringify(localProduct));
+    localStorage.setItem("cartCount", Object.keys(localProduct).length);
   };
 
   const handleDecreaseQty = (id) => {
@@ -41,6 +43,7 @@ function CartProduct(props) {
       handleDeleteId(id);
     }
     localStorage.setItem("cart", JSON.stringify(localProduct));
+    localStorage.setItem("cartCount", Object.keys(localProduct).length);
   };
 
   const handleDelete = (id) => {

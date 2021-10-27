@@ -5,8 +5,10 @@ import API_LINK from "../../Api/ApiLink";
 import CartProduct from "./CartProduct";
 import CartAction from "./CartAction";
 import "./Cart.css";
+import { MyContext } from "../../Context";
 
 class Cart extends PureComponent {
+  static contextType = MyContext;
   constructor(props) {
     super(props);
     this.token = localStorage.getItem("token");
@@ -44,6 +46,8 @@ class Cart extends PureComponent {
     });
     delete localCart[id];
     localStorage.setItem("cart", JSON.stringify(localCart));
+    localStorage.setItem("cartCount", Object.keys(localCart).length);
+    this.context.setCartCount(Object.keys(localCart).length);
   };
 
   handleProductIncrement = (id, qty) => {
@@ -73,46 +77,50 @@ class Cart extends PureComponent {
     console.log("Index render");
     if (this.state.cart.length > 0) {
       return (
-        <>
-          <section id="cart_items" className=" col-sm-9">
-            <div className="container">
-              <div className="breadcrumbs">
-                <ol className="breadcrumb">
-                  <li>
-                    <a href="#a">Home</a>
-                  </li>
-                  <li className="active">Shopping Cart</li>
-                </ol>
-              </div>
-              <div className="table-responsive cart_info">
-                <table className="table table-condensed">
-                  <thead>
-                    <tr className="cart_menu">
-                      <td className="image">Item</td>
-                      <td className="description"></td>
-                      <td className="price">Price</td>
-                      <td className="quantity">Quantity</td>
-                      <td className="total">Total</td>
-                      <td></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.cart.map((product) => (
-                      <CartProduct
-                        product={product}
-                        key={product.id}
-                        handleDeleteId={this.handleDeleteId}
-                        handelIncrement={this.handleProductIncrement}
-                        handelDecrement={this.handleProductDecrement}
-                      />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-          <CartAction cart={this.state.cart} />
-        </>
+        <MyContext.Consumer>
+          {(context) => (
+            <>
+              <section id="cart_items" className=" col-sm-9">
+                <div className="container">
+                  <div className="breadcrumbs">
+                    <ol className="breadcrumb">
+                      <li>
+                        <a href="#a">Home</a>
+                      </li>
+                      <li className="active">Shopping Cart</li>
+                    </ol>
+                  </div>
+                  <div className="table-responsive cart_info">
+                    <table className="table table-condensed">
+                      <thead>
+                        <tr className="cart_menu">
+                          <td className="image">Item</td>
+                          <td className="description"></td>
+                          <td className="price">Price</td>
+                          <td className="quantity">Quantity</td>
+                          <td className="total">Total</td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.cart.map((product) => (
+                          <CartProduct
+                            product={product}
+                            key={product.id}
+                            handleDeleteId={this.handleDeleteId}
+                            handelIncrement={this.handleProductIncrement}
+                            handelDecrement={this.handleProductDecrement}
+                          />
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+              <CartAction cart={this.state.cart} />
+            </>
+          )}
+        </MyContext.Consumer>
       );
     } else return null;
   }
